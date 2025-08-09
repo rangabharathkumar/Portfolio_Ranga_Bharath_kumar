@@ -1,0 +1,227 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Cyberpunk Portfolio Design System - All colors, gradients, fonts, etc defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Dark Cyberpunk Theme */
+    --background: 220 13% 4%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 13% 6%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 13% 6%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Neon Electric Blue */
+    --primary: 187 100% 50%;
+    --primary-foreground: 220 13% 4%;
+
+    /* Neon Green */
+    --secondary: 84 100% 50%;
+    --secondary-foreground: 220 13% 4%;
+
+    --muted: 220 13% 15%;
+    --muted-foreground: 220 9% 64%;
+
+    /* Cyber Purple */
+    --accent: 270 100% 50%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 13% 18%;
+    --input: 220 13% 18%;
+    --ring: 187 100% 50%;
+
+    --radius: 0.75rem;
+    
+    /* Custom Cyberpunk Colors */
+    --neon-blue: 187 100% 50%;
+    --neon-green: 84 100% 50%;
+    --cyber-purple: 270 100% 50%;
+    --dark-bg: 220 13% 4%;
+    --card-bg: 220 13% 6%;
+    --glass-bg: 220 13% 8%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--neon-blue)), hsl(var(--cyber-purple)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--neon-green)), hsl(var(--neon-blue)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--cyber-purple)), hsl(var(--neon-green)));
+    --gradient-text: linear-gradient(135deg, hsl(var(--neon-blue)), hsl(var(--neon-green)), hsl(var(--cyber-purple)));
+    
+    /* Shadows & Glows */
+    --glow-blue: 0 0 20px hsl(var(--neon-blue) / 0.5);
+    --glow-green: 0 0 20px hsl(var(--neon-green) / 0.5);
+    --glow-purple: 0 0 20px hsl(var(--cyber-purple) / 0.5);
+    --shadow-elegant: 0 25px 50px -12px hsl(var(--dark-bg) / 0.8);
+    
+    /* Typography */
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-sans: 'Poppins', sans-serif;
+    
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Light mode is disabled - Portfolio is cyberpunk themed (dark only) */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans overflow-x-hidden;
+    background: radial-gradient(ellipse at top, hsl(var(--glass-bg)), hsl(var(--dark-bg))), 
+                hsl(var(--dark-bg));
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Cyberpunk Button Variants */
+  .btn-neon {
+    @apply relative px-8 py-4 bg-transparent border-2 border-primary text-primary font-mono font-semibold
+           transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:shadow-[var(--glow-blue)]
+           before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-primary/20 before:to-transparent
+           before:translate-x-[-100%] before:transition-transform before:duration-700 hover:before:translate-x-[100%];
+  }
+  
+  .btn-cyber {
+    @apply relative px-8 py-4 bg-gradient-to-r from-accent to-secondary text-white font-mono font-bold
+           transform transition-all duration-300 hover:scale-105 hover:shadow-[var(--glow-purple)]
+           before:absolute before:inset-0 before:bg-white/10 before:opacity-0 before:transition-opacity
+           hover:before:opacity-100;
+  }
+  
+  /* Gradient Text Effects */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
+  }
+  
+  .gradient-text-primary {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+  
+  /* Glass Morphism Effects */
+  .glass-card {
+    @apply bg-glass-bg/50 backdrop-blur-lg border border-white/10 rounded-xl;
+  }
+  
+  .cyber-card {
+    @apply bg-card-bg/80 backdrop-blur-sm border border-primary/20 rounded-xl
+           shadow-lg hover:border-primary/40 hover:shadow-[var(--glow-blue)] transition-all duration-300;
+  }
+  
+  /* Glow Effects */
+  .glow-text {
+    text-shadow: 0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary)), 0 0 30px hsl(var(--primary));
+  }
+  
+  .glow-border {
+    @apply border border-primary/50 shadow-[0_0_15px_hsl(var(--primary)/0.3)];
+  }
+  
+  /* Animation Classes */
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+  }
+  
+  .typing-cursor::after {
+    content: '|';
+    animation: blink 1s infinite;
+  }
+}
+
+@layer utilities {
+  /* Custom Keyframes */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  @keyframes pulse-glow {
+    from { box-shadow: 0 0 10px hsl(var(--primary)/0.5); }
+    to { box-shadow: 0 0 30px hsl(var(--primary)/0.8), 0 0 40px hsl(var(--primary)/0.4); }
+  }
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  
+  .animate-slide-in-right {
+    animation: slideInRight 0.8s ease-out forwards;
+  }
+  
+  /* 3D Transforms */
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+}
